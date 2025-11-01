@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pará e Paraná Bar</title>
-    <link rel="stylesheet" href="{%static 'estilo.css' %}">
+    <link rel="stylesheet" href="{% static 'estilo.css' %}">
 </head>
 <body>
     <header>
@@ -15,12 +15,12 @@
                     <h1>Pará e Paraná Bar</h1>
                 </div>
                 <ul class="nav-menu">
-                    <li><a href="index.html">Início</a></li>
-                    <li><a href="cardapio-comida.html">Cardápio</a></li>
-                    <li><a href="cardapio-tipicas.html">Cardápio típicas</a></li>
-                    <li><a href="catalogo-jogos.html">Jogos</a></li>
-                    <li><a href="index.html#sobre">Sobre</a></li>
-                    <li><a href="index.html#contato">Contato</a></li>
+                    <li><a href="{% url "index" %}">Início</a></li>
+                    <li><a href="{% url "cardapio_comida" %}">Cardápio</a></li>
+                    <li><a href="{% url "cardapio_tipica" %}">Cardápio típicas</a></li>
+                    <li><a href="{% url "catalogo_jogo" %}">Jogos</a></li>
+                    <li><a href="{% url "index" %}#sobre">Sobre</a></li>
+                    <li><a href="{% url "index" %}#contato">Contato</a></li>
                 </ul>
             </div>
         </nav>
