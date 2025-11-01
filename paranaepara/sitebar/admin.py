@@ -5,8 +5,8 @@ from .models import Prato, Categoria_prato
 
 @admin.register(Prato)
 class PratoAdmin(admin.ModelAdmin):
-    list_display = ('nome_prato', 'categoria', 'preco_prato', 'disponibilidade')
-    list_filter = ('categoria', 'disponibilidade')
+    list_display = ('nome_prato', 'categoria', 'preco_prato', 'tipico')
+    list_filter = ('categoria', 'tipico')
     search_fields = ('nome_prato', 'descricao_prato', 'ingredientes_prato')
 
 @admin.register(Categoria_prato)

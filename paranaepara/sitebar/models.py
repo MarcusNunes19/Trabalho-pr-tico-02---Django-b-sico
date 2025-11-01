@@ -16,8 +16,8 @@ class Prato(models.Model):
     descricao_prato = models.TextField(blank=True)
     ingredientes_prato = models.TextField(blank=True)
     preco_prato = models.DecimalField(max_digits=6, decimal_places=2)
-    imagem_prato = models.IntegerField(blank=True, null=True)
-    disponibilidade = models.BooleanField(default=True)
+    imagem_prato = models.ImageField(upload_to='imagens/', blank=True, null=True)
+    tipico = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.nome_prato} ({self.categoria.nome_categoria})"

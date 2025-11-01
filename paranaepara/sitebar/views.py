@@ -10,17 +10,21 @@ def index(request):
     return HttpResponse(template.render())
 
 def cardapio_comida(request):
-    categorias = Categoria_prato.objects.all()
-    pratos = Prato.objects.filter(disponibilidade=True).order_by('categoria__nome_categoria', 'nome_prato')
+    categorias = Categoria_prato.objects.filter(pratos__tipico=False).distinct()
+    pratos = Prato.objects.order_by('categoria__nome_categoria', 'nome_prato')
     return render(request, 'sitebar/cardapio-comida.html', {
         'categorias': categorias,
         'pratos': pratos
     })
 
-def cardapio_tipica(resquest):
-    template = loader.get_template('sitebar/cardapio-tipicas.html')
-    return HttpResponse(template.render())
+def cardapio_tipica(request):
+    categorias = Categoria_prato.objects.filter(pratos__tipico=True).distinct()
+    pratos = Prato.objects.order_by('categoria__nome_categoria', 'nome_prato')
+    return render(request, 'sitebar/cardapio-tipicas.html', {
+        'categorias': categorias,
+        'pratos': pratos
+    })
 
-def catalogo_jogo(resquest):
+def catalogo_jogo(request):
     template = loader.get_template('sitebar/catalogo-jogos.html')
     return HttpResponse(template.render())
