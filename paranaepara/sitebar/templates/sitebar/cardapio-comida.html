@@ -38,26 +38,28 @@
 
                     <div class="cardapio-grid">
                         {% for prato in pratos %}
-                            {% if prato.categoria == categoria %}
-                                <div class="cardapio-opcoes">
-                                    <div class="cardapio-opcoes-content">
-                                        <h3>{{ prato.nome_prato }}</h3>
+                            {% if prato.tipico == False %}
+                                {% if prato.categoria == categoria %}
+                                    <div class="cardapio-opcoes">
+                                        <div class="cardapio-opcoes-content">
+                                            <h3>{{ prato.nome_prato }}</h3>
 
-                                        {% if prato.imagem_prato %}
-                                        <div class="cardapio-opcoes-image">
-                                            <img src="{{ prato.imagem_prato.url }}" alt="{{ prato.nome_prato }}">
+                                            {% if prato.imagem_prato %}
+                                            <div class="cardapio-opcoes-image">
+                                                <img src="{{ prato.imagem_prato.url }}" alt="{{ prato.nome_prato }}">
+                                            </div>
+                                            {% endif %}
+
+                                            <p>{{ prato.descricao_prato|default:"Sem descrição." }}</p>
+
+                                            {% if prato.ingredientes_prato %}
+                                            <p><strong>Ingredientes:</strong> {{ prato.ingredientes_prato }}</p>
+                                            {% endif %}
+
+                                            <p class="preco">R$ {{ prato.preco_prato }}</p>
                                         </div>
-                                        {% endif %}
-
-                                        <p>{{ prato.descricao_prato|default:"Sem descrição." }}</p>
-
-                                        {% if prato.ingredientes_prato %}
-                                        <p><strong>Ingredientes:</strong> {{ prato.ingredientes_prato }}</p>
-                                        {% endif %}
-
-                                        <p class="preco">R$ {{ prato.preco_prato }}</p>
                                     </div>
-                                </div>
+                                {% endif %}
                             {% endif %}
                         {% endfor %}
                     </div>
