@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jogos - Pará e Paraná Bar</title>
-    <link rel="stylesheet" href="../estilo.css">
+    <link rel="stylesheet" href="{% static 'estilo.css' %}">
 </head>
 <body>
     <header>
@@ -14,12 +15,12 @@
                     <h1>Pará e Paraná Bar</h1>
                 </div>
                 <ul class="nav-menu">
-                    <li><a href="{% url "index" %}">Início</a></li>
-                    <li><a href="{% url "cardapio_comida" %}">Cardápio</a></li>
-                    <li><a href="{% url "cardapio_tipica" %}">Cardápio típicas</a></li>
-                    <li><a href="{% url "catalogo_jogo" %}">Jogos</a></li>
-                    <li><a href="{% url "index" %}#sobre">Sobre</a></li>
-                    <li><a href="{% url "index" %}#contato">Contato</a></li>
+                    <li><a href="{% url 'index' %}">Início</a></li>
+                    <li><a href="{% url 'cardapio_comida' %}">Cardápio</a></li>
+                    <li><a href="{% url 'cardapio_tipica' %}">Cardápio típicas</a></li>
+                    <li><a href="{% url 'catalogo_jogo' %}">Jogos</a></li>
+                    <li><a href="{% url 'index' %}#sobre">Sobre</a></li>
+                    <li><a href="{% url 'index' %}#contato">Contato</a></li>
                 </ul>
             </div>
         </nav>
@@ -31,82 +32,42 @@
                 <h1>Catálogo de Jogos</h1>
                 <p>Jogos para toda a família se divertir</p>
             </div>
-            
-                    <!-- CONTEÚDO GERADO AUTOMATICAMENTE -->
-                    <div class="jogos-category">
-<h2>Jogos Disponíveis</h2>
-<div class="jogos-grid">
 
-        <div class="jogo-item">
-            <div class="jogo-image">
-                <img src="imagens/war.png" alt="War" loading="lazy">
-            </div>
-            <div class="jogo-content">
-                <h3>War</h3>
-                <div class="jogo-info">
-                    <span class="jogo-tipo">Estratégia/Conquista</span>
-                    <span class="jogo-jogadores">Jogadores: 2-6</span>
-                    <span class="jogo-tempo">Tempo: 120+ min</span>
-                </div>
-                <p class="jogo-descricao">Clássico jogo de estratégia e conquista de territórios</p>
-                <p class="jogo-detalhes">Um jogo de tabuleiro onde o objetivo é conquistar territórios e cumprir objetivos secretos para vencer.</p>
-            </div>
-        </div>
-        
-        <div class="jogo-item">
-            <div class="jogo-image">
-                <img src="imagens/ticket_ride.png" alt="Ticket to Ride" loading="lazy">
-            </div>
-            <div class="jogo-content">
-                <h3>Ticket to Ride</h3>
-                <div class="jogo-info">
-                    <span class="jogo-tipo">Estratégia/Construção</span>
-                    <span class="jogo-jogadores">Jogadores: 2-5</span>
-                    <span class="jogo-tempo">Tempo: 30-60 min</span>
-                </div>
-                <p class="jogo-descricao">Construa rotas ferroviárias pelos Estados Unidos</p>
-                <p class="jogo-detalhes">Os jogadores coletam cartas de trens para construir rotas que conectam cidades. Vence quem cumprir mais bilhetes de destino e somar mais pontos.</p>
-            </div>
-        </div>
-        
-        <div class="jogo-item">
-            <div class="jogo-image">
-                <img src="imagens/xadrez.png" alt="Xadrez" loading="lazy">
-            </div>
-            <div class="jogo-content">
-                <h3>Xadrez</h3>
-                <div class="jogo-info">
-                    <span class="jogo-tipo">Estratégia Abstrata</span>
-                    <span class="jogo-jogadores">Jogadores: 2</span>
-                    <span class="jogo-tempo">Tempo: 30-60 min</span>
-                </div>
-                <p class="jogo-descricao">O clássico jogo de estratégia que desafia a mente</p>
-                <p class="jogo-detalhes">Jogo milenar de pura estratégia, onde cada peça tem movimentos únicos. O objetivo é dar xeque-mate no rei adversário.</p>
-            </div>
-        </div>
-        
-        <div class="jogo-item">
-            <div class="jogo-image">
-                <img src="imagens/combate.png" alt="Combate" loading="lazy">
-            </div>
-            <div class="jogo-content">
-                <h3>Combate</h3>
-                <div class="jogo-info">
-                    <span class="jogo-tipo">Estratégia Militar</span>
-                    <span class="jogo-jogadores">Jogadores: 2</span>
-                    <span class="jogo-tempo">Tempo: 30-60 min</span>
-                </div>
-                <p class="jogo-descricao">Jogo de estratégia com peças militares escondidas</p>
-                <p class="jogo-detalhes">Os jogadores movimentam suas tropas e tentam capturar a bandeira do oponente, usando peças ocultas para enganar o adversário.</p>
-            </div>
-        </div>
-        </div>
-</div>
+            <div class="jogos-category">
+                <h2>Jogos Disponíveis</h2>
+                <div class="jogos-grid">
+                    
+                    {% for jogo in jogos %}
+                    <div class="jogo-item">
+                        <div class="jogo-image">
+                            {% if jogo.imagem %}
+                                <img src="{{ jogo.imagem.url }}" alt="{{ jogo.nome }}" loading="lazy">
+                            {% else %}
+                                <img src="{% static 'imagens/sem_imagem.png' %}" alt="Imagem indisponível" loading="lazy">
+                            {% endif %}
+                        </div>
+                        <div class="jogo-content">
+                            <h3>{{ jogo.nome }}</h3>
+                            <div class="jogo-info">
+                                <span class="jogo-tipo">{{ jogo.tipo }}</span>
+                                <span class="jogo-jogadores">Jogadores: {{ jogo.jogadores }}</span>
+                                <span class="jogo-tempo">Tempo: {{ jogo.tempo_partida }}</span>
+                            </div>
+                            <p class="jogo-descricao">{{ jogo.descricao_curta }}</p>
+                            <p class="jogo-detalhes">{{ jogo.descricao_detalhada }}</p>
 
-                    <!-- FIM DO CONTEÚDO GERADO -->
+                            <p class="jogo-copias">
+                                <strong>Disponíveis:</strong> {{ jogo.copias_disponiveis }} /
+                                <strong>Total:</strong> {{ jogo.total_copias }}
+                            </p>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <p>Nenhum jogo cadastrado no momento.</p>
+                    {% endfor %}
 
                 </div>
-            </div>    
+            </div>
         </div>
     </main>
 
@@ -117,7 +78,7 @@
                     <h3>Pará e Paraná Bar</h3>
                     <p>O mais gostoso do Pará e Paraná em um só lugar!</p>
                 </div>
-                 <div class="footer-bottom">
+                <div class="footer-bottom">
                     <div class="footer-column">
                         <h3>Contatos</h3>
                         <p>Rua Londrina , 1836 - Parque do Iguaçu</p>

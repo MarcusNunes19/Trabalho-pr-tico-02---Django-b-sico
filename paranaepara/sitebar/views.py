@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from .models import Categoria_prato, Prato
+from .models import Jogo
 
 # Create your views here.
 
@@ -28,3 +29,7 @@ def cardapio_tipica(request):
 def catalogo_jogo(request):
     template = loader.get_template('sitebar/catalogo-jogos.html')
     return HttpResponse(template.render())
+
+def catalogo_jogos(request):
+    jogos = Jogo.objects.all()
+    return render(request, 'sitebar/catalogo-jogos.html', {'jogos': jogos})
