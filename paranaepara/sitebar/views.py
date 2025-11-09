@@ -27,9 +27,5 @@ def cardapio_tipica(request):
     })
 
 def catalogo_jogo(request):
-    template = loader.get_template('sitebar/catalogo-jogos.html')
-    return HttpResponse(template.render())
-
-def catalogo_jogos(request):
     jogos = Jogo.objects.all()
     return render(request, 'sitebar/catalogo-jogos.html', {'jogos': jogos})
